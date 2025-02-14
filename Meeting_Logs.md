@@ -13,7 +13,7 @@
 - Decided on team name: The DataBasers  
 
 **Tasks Allocated:**
-- David: Review the project description, brainstorm requirements, and create/share Part 2 document. Due 2/19
+- Dylan: Review the project description, brainstorm requirements, and create/share Part 2 document. Due 2/19
 - Josh: Review project description, brainstorm requirements, and assist in formatting Dylan's document. Due 2/19
 - Aiham: Look into where/how you will create, store, and share the ER diagram. Think about project requirements. Due 2/19
 - Nayyir: Look into potential means of implementing the database (mySQL, MariaDB, etc). Think about project requirements. Due 2/19
