@@ -41,11 +41,11 @@
 - Discussed using MySQL vs MariaDB and brainstormed the hardware/software requirements.
 
 **Tasks Allocated:**  
-- Josh: Work on developing section 3, specifically section 3.1
-- Dylan: Work on developing section 3. Help with 3.1(functional requirements) and 3.2(data entities).
-- Aiham: Create a shareable ER Diagram document for next week's meeting. Flesh out section 3.2 (data entities) in requirements.
-- Ashley: Work on making section 2 more defined and presentable.
-- Nayyir: Look into MariaDB on the EECS Servers and use to work on section 4 of the requirements document.
+- Josh: Work on developing section 3, specifically section 3.1 (Due 2/26)
+- Dylan: Work on developing section 3. Help with 3.1(functional requirements) and 3.2(data entities). (Due 2/26)
+- Aiham: Create a shareable ER Diagram document for next week's meeting. Flesh out section 3.2 (data entities) in requirements. (Due 2/26)
+- Ashley: Work on making section 2 more defined and presentable. (Due 2/26)
+- Nayyir: Look into MariaDB on the EECS Servers and use to work on section 4 of the requirements document. (Due 2/26)
 
   
 **Follow Up:** Next meeting scheduled for Wednesday, 2/26 at 5:00 PM.
