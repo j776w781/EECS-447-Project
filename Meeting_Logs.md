@@ -24,8 +24,8 @@
 ## **02/19/2025**  
 **Time:** 5:00 PM  
 **Location:** Virtual(Discord)  
-**Objective:** Review project requirements, work on requirements document. 
-**Team Members Present:** Josh, Aiham, Dylan, Ashley,    
+**Objective:** Review project requirements, work on requirements document.   
+**Team Members Present:** Josh, Aiham, Dylan, Ashley, Nayyir   
 **Tasks Completion Confirmation:**  
 - Dylan: Review the project description, brainstorm requirements, and create/share Part 2 document. (Complete)
 - Josh: Review project description, brainstorm requirements, and assist in formatting Dylan's document. (Complete)
