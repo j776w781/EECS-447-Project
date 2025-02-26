@@ -54,23 +54,26 @@
 **Time:** 5:00 PM  
 **Location:** Virtual(Discord)  
 **Objective:** Brainstorm conceptual design and begin ER diagram    
-**Team Members Present:**    
+**Team Members Present:** Josh, Dylan, Aiham, Ashley, Nayyir     
 **Tasks Completion Confirmation:**  
-- Josh: Work on developing section 3, specifically section 3.1 
-- Dylan: Work on developing section 3. Help with 3.1(functional requirements) and 3.2(data entities).
-- Aiham: Create a shareable ER Diagram document for next week's meeting. Flesh out section 3.2 (data entities) in requirements.
-- Ashley: Work on making section 2 more defined and presentable.
-- Nayyir: Look into MariaDB on the EECS Servers and use to work on section 4 of the requirements document.
+- Josh: Work on developing section 3, specifically section 3.1(Complete) 
+- Dylan: Work on developing section 3. Help with 3.1(functional requirements) and 3.2(data entities).(Complete)
+- Aiham: Create a shareable ER Diagram document for next week's meeting. Flesh out section 3.2 (data entities) in requirements.(Complete)
+- Ashley: Work on making section 2 more defined and presentable.(Complete)
+- Nayyir: Look into MariaDB on the EECS Servers and use to work on section 4 of the requirements document.(Complete)
 
 **Activities**  
-- adfassdfasdf
+- Began work on ER diagram.
+- Discussed allowing multiple copies of each item.
+- Decided to use a unique 6-digit Id for each media item. This would allow us to uniquely identify each individual piece of media.
+- Reviewed the Part 2 Document.
 
 **Tasks Allocated:**  
-- Josh: 
-- Dylan: 
-- Aiham: 
-- Ashley: 
-- Nayyir: 
+- Josh: Finishing up the requirements document, and submitting it. Create and prepare part 3 document (Due 3/2 and 3/5) 
+- Dylan: Also finish up the requirements document, mostly with formatting and remaining sections (Due 3/2)
+- Aiham: Work on translating data entities from part 2 into ER diagram. (Due 3/5)
+- Ashley: Assist Aiham in working on the ER diagram, mostly translating relationships and entities. (Due 3/5)
+- Nayyir: Log into MariaDB and figure out how it works (Due 3/5) 
 
   
 **Follow Up:** Next meeting scheduled for Wednesday, 3/5 at 5:00 PM.  
