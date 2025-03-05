@@ -78,3 +78,27 @@
   
 **Follow Up:** Next meeting scheduled for Wednesday, 3/5 at 5:00 PM.  
 
+
+## **3/5/2025**  
+**Time:** 5:00 PM  
+**Location:** Virtual(Discord)  
+**Objective:** Work on ER diagram and Part 3 document    
+**Team Members Present:** Josh, Dylan, Aiham, Ashley, Nayyir     
+**Tasks Completion Confirmation:**  
+- Josh: Finishing up the requirements document, and submitting it. Create and prepare part 3 document (Complete) 
+- Dylan: Also finish up the requirements document, mostly with formatting and remaining sections. 
+- Aiham: Work on translating data entities from part 2 into ER diagram.
+- Ashley: Assist Aiham in working on the ER diagram, mostly translating relationships and entities. 
+- Nayyir: Log into MariaDB and figure out how it works. 
+
+**Activities**
+- l;kj
+
+**Tasks Allocated:**  
+- Josh:
+- Dylan:
+- Aiham:
+- Ashley:
+- Nayyir:
+
+**Follow Up:** Next meeting scheduled for Wednesday, 3/12 at 5:00 PM.
