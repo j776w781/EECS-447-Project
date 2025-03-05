@@ -86,19 +86,21 @@
 **Team Members Present:** Josh, Dylan, Aiham, Ashley, Nayyir     
 **Tasks Completion Confirmation:**  
 - Josh: Finishing up the requirements document, and submitting it. Create and prepare part 3 document (Complete) 
-- Dylan: Also finish up the requirements document, mostly with formatting and remaining sections. 
-- Aiham: Work on translating data entities from part 2 into ER diagram.
-- Ashley: Assist Aiham in working on the ER diagram, mostly translating relationships and entities. 
-- Nayyir: Log into MariaDB and figure out how it works. 
+- Dylan: Also finish up the requirements document, mostly with formatting and remaining sections. (Complete)
+- Aiham: Work on translating data entities from part 2 into ER diagram. (Complete)
+- Ashley: Assist Aiham in working on the ER diagram, mostly translating relationships and entities. (Complete)
+- Nayyir: Log into MariaDB and figure out how it works. (Complete)
 
 **Activities**
-- l;kj
+- Primarily worked on the ER diagram to prepare the Part 3 Document
+- Reviewed the min..max notation style so that the ER diagram remained cohesive and understandable.
+- Reveiwed what still needed to be added to the ER diagram and allocated tasks accordingly.
 
 **Tasks Allocated:**  
-- Josh:
-- Dylan:
-- Aiham:
-- Ashley:
-- Nayyir:
+- Josh: Finish up the loan entity on the ER diagram. Prepare Section 1 of the Part 3 document. (3/12)
+- Dylan: Finish up the payment entity on the ER diagram, make sure that the ER diagram meets the requirements. (3/12)
+- Aiham: Finish up the Fine table and also transfer data entries from Part 2 into part. (3/12)
+- Ashley: Finish up the reservation entity on the ER diagram. Look over the instructions for the Part 4 document and brainstorm ideas. (3/12)
+- Nayyir: Keep looking into MariaDB, specifically how all of us can edit the file. Make sure the ER diagram can be feasably implemented in MariaDB.(3/12)
 
 **Follow Up:** Next meeting scheduled for Wednesday, 3/12 at 5:00 PM.
