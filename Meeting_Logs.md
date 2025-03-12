@@ -103,4 +103,29 @@
 - Ashley: Finish up the reservation entity on the ER diagram. Look over the instructions for the Part 4 document and brainstorm ideas. (3/12)
 - Nayyir: Keep looking into MariaDB, specifically how all of us can edit the file. Make sure the ER diagram can be feasably implemented in MariaDB.(3/12)
 
-**Follow Up:** Next meeting scheduled for Wednesday, 3/12 at 5:00 PM.
+**Follow Up:** Next meeting scheduled for Wednesday, 3/12 at 5:00 PM.  
+
+
+## **3/12/2025**  
+**Time:** 5:00 PM  
+**Location:** Virtual(Discord)
+**Objective:** Review ER diagram, Go over Project Part 4  
+**Team Members Present:** ;lkj  
+**Tasks Completion Confirmation**  
+- Josh: Finish up the loan entity on the ER diagram. Prepare Section 1 of the Part 3 document. (Complete)
+- Dylan: Finish up the payment entity on the ER diagram, make sure that the ER diagram meets the requirements. (Complete)
+- Aiham: Finish up the Fine table and also transfer data entries from Part 2 into part.
+- Ashley: Finish up the reservation entity on the ER diagram. Look over the instructions for the Part 4 document and brainstorm ideas.
+- Nayyir: Keep looking into MariaDB, specifically how all of us can edit the file. Make sure the ER diagram can be feasably implemented in MariaDB.
+
+**Activities**  
+- ;lkj
+
+**Tasks Allocated:**  
+- Josh:
+- Dylan:
+- Aiham:
+- Ashley:
+- Nayyir:
+
+**Follow Up:** Next meeting scheduled for Wednesday, 3/26 at 5:00 PM. Team will not meet over Spring Break.
