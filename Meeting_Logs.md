@@ -135,25 +135,27 @@
 
 
 ## **3/26/2025**  
-**Time:** 5:00 PM  
+**Time:** 5:15 PM -- more than one member was going to be delayed.  
 **Location** Virtual(Discord)  
 **Objective** Review work on Part 4 and discuss MariaDB for Part 5.  
-**Team Members Present:** Josh,  
+**Team Members Present:** Josh, Ashley, Nayyir, Aiham, Dylan(Medical Emergency) 
 **Tasks Completion Confirmation:**  
 - Josh: Finish up Project Part 3, particularly section 2.3. Turn it 8:00 PM on Sunday. (Complete)
 - Dylan: Finish up project part 3 section 2.1. (Complete)
 - Aiham: Finish up ER diagram and work on section 2.2. (Complete)
-- Ashley: Work on Project Part 4, start with the data dictionary (section 3.1) 
-- Nayyir: Look into adding team member permissions in the existing database in MariaDB.
+- Ashley: Work on Project Part 4, start with the data dictionary (Complete) 
+- Nayyir: Look into adding team member permissions in the existing database in MariaDB. (Complete)
 
 **Activities:**  
-- l;kj
+- Reviewed work conducted on the Part 4 document. The schema diagram and data dictionary were completed before the meeting.
+- Discussed MariaDB and user access control with Nayyir. Still working on how to grant permissions.
+- Due to a Sunday commitment, Josh will have to turn in the Part 4 document on Saturday, 3/29. Task due dates were updated accordingly.
 
 **Tasks Allocated:**  
-- Josh:
-- Dylan:
-- Aiham:
-- Ashley:
-- Nayyir:
+- Josh: Finish Section 2.5 and 2.6(Function Dependencies). Turn in by Sunday (Due 3/29)
+- Dylan: On account of his medical emergency, Dylan will not have any tasks this week.
+- Aiham: Review the relational schema model and make sure it translates the ER diagram perfectly. (Due 3/29)
+- Ashley: Review all sections of the Part 4 Document for any problems. (Due 3/29)
+- Nayyir: Grant edit permissions for all members in the MariaDB database project. (Due 4/2)
 
 **Follow Up:** Next meeting scheduled for Wednesday, 4/2 at 5:00 PM
