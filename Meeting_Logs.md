@@ -138,7 +138,7 @@
 **Time:** 5:15 PM -- more than one member was going to be delayed.  
 **Location** Virtual(Discord)  
 **Objective** Review work on Part 4 and discuss MariaDB for Part 5.  
-**Team Members Present:** Josh, Ashley, Nayyir, Aiham, Dylan(Medical Emergency) 
+**Team Members Present:** Josh, Ashley, Nayyir, Aiham
 **Tasks Completion Confirmation:**  
 - Josh: Finish up Project Part 3, particularly section 2.3. Turn it 8:00 PM on Sunday. (Complete)
 - Dylan: Finish up project part 3 section 2.1. (Complete)
@@ -147,6 +147,7 @@
 - Nayyir: Look into adding team member permissions in the existing database in MariaDB. (Complete)
 
 **Activities:**  
+- IMPORTANT NOTE: Dylan was absent from the meeting due to a medical emergency.
 - Reviewed work conducted on the Part 4 document. The schema diagram and data dictionary were completed before the meeting.
 - Discussed MariaDB and user access control with Nayyir. Still working on how to grant permissions.
 - Due to a Sunday commitment, Josh will have to turn in the Part 4 document on Saturday, 3/29. Task due dates were updated accordingly.
