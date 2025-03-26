@@ -111,14 +111,14 @@
 **Location:** Virtual(Discord)
 **Objective:** Review ER diagram, Go over Project Part 4  
 **Team Members Present:** Josh, Dylan, Aiham, Ashley, Nayyir  
-**Tasks Completion Confirmation**  
+**Tasks Completion Confirmation:**  
 - Josh: Finish up the loan entity on the ER diagram. Prepare Section 1 of the Part 3 document. (Complete)
 - Dylan: Finish up the payment entity on the ER diagram, make sure that the ER diagram meets the requirements. (Complete)
 - Aiham: Finish up the Fine table and also transfer data entries from Part 2 into part. (Complete)
 - Ashley: Finish up the reservation entity on the ER diagram. Look over the instructions for the Part 4 document and brainstorm ideas. (Complete)
 - Nayyir: Keep looking into MariaDB, specifically how all of us can edit the file. Make sure the ER diagram can be feasably implemented in MariaDB. (Complete)
 
-**Activities**  
+**Activities:**  
 - Reviewed contributions to the ER diagram and discussed adding attributes to the relationships. It was deemed unnecessary.
 - Reviewed remaining Part 3 tasks and assigned them to members.
 - Looked over instructions for Part 4 and brainstormed our approach.
@@ -131,4 +131,29 @@
 - Ashley: Work on Project Part 4, start with the data dictionary (section 3.1) (Due 3/26)
 - Nayyir: Look into adding team member permissions in the existing database in MariaDB. (Due 3/26)
 
-**Follow Up:** Next meeting scheduled for Wednesday, 3/26 at 5:00 PM. Team will not meet over Spring Break.
+**Follow Up:** Next meeting scheduled for Wednesday, 3/26 at 5:00 PM. Team will not meet over Spring Break.  
+
+
+## **3/26/2025**  
+**Time:** 5:00 PM  
+**Location** Virtual(Discord)  
+**Objective** Review work on Part 4 and discuss MariaDB for Part 5.  
+**Team Members Present:** Josh,  
+**Tasks Completion Confirmation:**  
+- Josh: Finish up Project Part 3, particularly section 2.3. Turn it 8:00 PM on Sunday. (Complete)
+- Dylan: Finish up project part 3 section 2.1. (Complete)
+- Aiham: Finish up ER diagram and work on section 2.2. (Complete)
+- Ashley: Work on Project Part 4, start with the data dictionary (section 3.1) 
+- Nayyir: Look into adding team member permissions in the existing database in MariaDB.
+
+**Activities:**  
+- l;kj
+
+**Tasks Allocated:**  
+- Josh:
+- Dylan:
+- Aiham:
+- Ashley:
+- Nayyir:
+
+**Follow Up:** Next meeting scheduled for Wednesday, 4/2 at 5:00 PM
