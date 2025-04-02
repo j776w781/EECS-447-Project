@@ -1,3 +1,6 @@
+-- How I was able to use this: mysql -h mysql.eecs.ku.edu -u [USERNAME] -p < librarydb.sql
+USE [INSERT YOUR DATABASE NAME HERE]
+
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS members;
 DROP TABLE IF EXISTS membershipType;
@@ -22,7 +25,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE members (
-    memberID INT PRIMARY KEY AUTO_INCREMENT,
+    memberID INT PRIMARY KEY AUTO_INCREMENT
 );
 
 CREATE TABLE membershipType (
