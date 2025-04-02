@@ -136,9 +136,9 @@
 
 ## **3/26/2025**  
 **Time:** 5:15 PM -- more than one member was going to be delayed.  
-**Location** Virtual(Discord)  
-**Objective** Review work on Part 4 and discuss MariaDB for Part 5.  
-**Team Members Present:** Josh, Ashley, Nayyir, Aiham
+**Location:** Virtual(Discord)  
+**Objective:** Review work on Part 4 and discuss MariaDB for Part 5.  
+**Team Members Present:** Josh, Ashley, Nayyir, Aiham  
 **Tasks Completion Confirmation:**  
 - Josh: Finish up Project Part 3, particularly section 2.3. Turn it 8:00 PM on Sunday. (Complete)
 - Dylan: Finish up project part 3 section 2.1. (Complete)
@@ -159,4 +159,29 @@
 - Ashley: Review all sections of the Part 4 Document for any problems. (Due 3/29)
 - Nayyir: Grant edit permissions for all members in the MariaDB database project. (Due 4/2)
 
-**Follow Up:** Next meeting scheduled for Wednesday, 4/2 at 5:00 PM
+**Follow Up:** Next meeting scheduled for Wednesday, 4/2 at 5:00 PM  
+
+
+## **4/2/2025**  
+**Time:** 5:00 PM  
+**Location:** Virtual(Discord)  
+**Objective:** Discuss the logistics of implementation in depth. Review MariaDB usage and divide initial workload.   
+**Team Members Present:** Josh  
+**Tasks Completion Confirmation:**  
+- Josh: Finish Section 2.5 and 2.6(Functional Dependencies). Turn in by Sunday (Complete)
+- Dylan: On account of his medical emergency, Dylan will not have any tasks this week.
+- Aiham: Review the relational schema model and make sure it translates the ER diagram perfectly. (Complete)
+- Ashley: Review all sections of the Part 4 Document for any problems. (Complete)
+- Nayyir: Grant edit permissions for all members in the MariaDB database project. (Due 4/2)
+
+**Activities:**  
+- ;lkj;lkj
+
+**Tasks Allocated:**  
+- Josh:
+- Dylan:
+- Aiham:
+- Ashley:
+- Nayyir:
+
+**Follow Up:** Next meeting scheduled for Wednesday, 4/9 at 5:00 PM
