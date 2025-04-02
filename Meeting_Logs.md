@@ -166,22 +166,26 @@
 **Time:** 5:00 PM  
 **Location:** Virtual(Discord)  
 **Objective:** Discuss the logistics of implementation in depth. Review MariaDB usage and divide initial workload.   
-**Team Members Present:** Josh  
+**Team Members Present:** Josh, Ashley, Dylan, Nayyir, Aiham  
 **Tasks Completion Confirmation:**  
 - Josh: Finish Section 2.5 and 2.6(Functional Dependencies). Turn in by Sunday (Complete)
 - Dylan: On account of his medical emergency, Dylan will not have any tasks this week.
 - Aiham: Review the relational schema model and make sure it translates the ER diagram perfectly. (Complete)
 - Ashley: Review all sections of the Part 4 Document for any problems. (Complete)
-- Nayyir: Grant edit permissions for all members in the MariaDB database project. (Due 4/2)
+- Nayyir: Grant edit permissions for all members in the MariaDB database project. (Complete)
 
 **Activities:**  
-- ;lkj;lkj
+- Discussed in detail how to actually implement the database in MariaDB in a way that is portable for all users.
+- Decided on a zip file containing sever source SQL files. The tester would log on to their MariaDB account and build the database from scratch using the source files.
+- Reviewed the minimal requirements for the database (20 books, 20 magazines, 20 digital media items).
+- Divided up the initial workload which includes finishing up the build file (librarydb.sql) and finding the initial media items for the database.
+- We will work on transactions and adding the actual records later.
 
 **Tasks Allocated:**  
-- Josh:
-- Dylan:
-- Aiham:
-- Ashley:
-- Nayyir:
+- Josh: Add in all of the remaining relations from Part 4 that haven't been implemented yet. Check for any errors. (Due 4/9)
+- Dylan: Find at least 20 books of varying genres for our database. (Due 4/9)
+- Aiham: Find at least 20 magazines of varying publications for our database. (Due 4/9)
+- Ashley: Find at least 20 pieces of digital media for our database. (Due 4/9) 
+- Nayyir: Clean up the tables already created in librarydb.sql, and make sure there are no errors. Make sure they match the Part 4 document. (Due 4/9)
 
 **Follow Up:** Next meeting scheduled for Wednesday, 4/9 at 5:00 PM
