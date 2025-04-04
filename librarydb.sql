@@ -1,20 +1,25 @@
--- How I was able to use this: mysql -h mysql.eecs.ku.edu -u [USERNAME] -p < librarydb.sql
-USE [INSERT YOUR DATABASE NAME HERE]
-
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS members;
-DROP TABLE IF EXISTS membershipType;
-DROP TABLE IF EXISTS media;
+DROP TABLE IF EXISTS loaned_in;
+DROP TABLE IF EXISTS borrows;
+DROP TABLE IF EXISTS triggers;
+DROP TABLE IF EXISTS owes;
+DROP TABLE IF EXISTS pays_for;
+DROP TABLE IF EXISTS pays;
+DROP TABLE IF EXISTS reserves;
+DROP TABLE IF EXISTS reserved_in;
+DROP TABLE IF EXISTS payment;
+DROP TABLE IF EXISTS fine;
+DROP TABLE IF EXISTS loan;
+DROP TABLE IF EXISTS reservation;
+DROP TABLE IF EXISTS member;
+DROP TABLE IF EXISTS staff;
+DROP TABLE IF EXISTS admin;
+DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS digitalMedia;
 DROP TABLE IF EXISTS magazine;
-DROP TABLE IF EXISTS loan;
-DROP TABLE IF EXISTS reservation;
-DROP TABLE IF EXISTS fine;
-DROP TABLE IF EXISTS payment;
+DROP TABLE IF EXISTS media;
 
-
-CREATE TABLE users (
+CREATE TABLE user (
     userID INT PRIMARY KEY CHECK (userID >= 0),
     name VARCHAR(100),
     phoneNumber VARCHAR(100),
@@ -24,20 +29,26 @@ CREATE TABLE users (
     accountStatus ENUM("active", "inactive")
 );
 
-CREATE TABLE members (
-    memberID INT PRIMARY KEY AUTO_INCREMENT
+CREATE TABLE member (
+	userID INT PRIMARY KEY,
+	typeNAME ENUM("regular", "student", "senior"),
+	borrowingLimit INT CHECK (borrowingLimit > 0),
+	lateFeeRate DECIMAL CHECK (lateFeeRate > 0),
+	FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE
 );
 
-CREATE TABLE membershipType (
-    id INT PRIMARY KEY,
-    FOREIGN KEY (id) REFERENCES members(memberID) ON DELETE CASCADE,
-    typeName ENUM("regular", "student", "senior") NOT NULL,
-    borrowingLimit INT CHECK (borrowingLimit > 0),
-    lateFeeRate DECIMAL CHECK (lateFeeRate > 0)
+CREATE TABLE staff (
+    userID INT PRIMARY KEY,
+    FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE
+);
+
+CREATE TABLE admin (
+    userID INT PRIMARY KEY,
+    FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE
 );
 
 CREATE TABLE media (
-    itemID INT PRIMARY KEY AUTO_INCREMENT CHECK (itemID >= 0),
+    itemID INT PRIMARY KEY CHECK (itemID >= 0),
     title VARCHAR(100),
     itemType ENUM("book", "digital", "magazine"),
     publicationYear INT CHECK (publicationYear > 0),
@@ -47,16 +58,17 @@ CREATE TABLE media (
 );
 
 CREATE TABLE book (
-    bookID INT PRIMARY KEY,
-    FOREIGN KEY (bookID) REFERENCES media(itemID) ON DELETE CASCADE,
-    isbn INT CHECK (isbn > 0),
+    itemID INT PRIMARY KEY,
+    FOREIGN KEY (itemID) REFERENCES media(itemID) ON DELETE CASCADE,
+    ISBN INT CHECK (ISBN > 0),
     author VARCHAR(100),
     genre VARCHAR(100)
 );
 
 CREATE TABLE digitalMedia (
-    digitalMediaID INT PRIMARY KEY,
-    FOREIGN KEY (digitalMediaID) REFERENCES media(itemID) ON DELETE CASCADE,
+    itemID INT PRIMARY KEY,
+    FOREIGN KEY (itemID) REFERENCES media(itemID) ON DELETE CASCADE,
+    digitalMediaID INT CHECK (digitalMediaID > 0),
     creator VARCHAR(100),
     genre VARCHAR(100)
 );
@@ -69,9 +81,9 @@ CREATE TABLE magazine (
 );
 
 CREATE TABLE loan (
-    loadID INT PRIMARY KEY CHECK (loanID >= 0),
+    loanID INT PRIMARY KEY CHECK (loanID >= 0),
     memberID INT,
-    FOREIGN KEY (memberID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (memberID) REFERENCES member(userID) ON DELETE CASCADE,
     itemID INT,
     FOREIGN KEY (itemID) REFERENCES media(itemID),
     checkoutDate DATE,
@@ -80,21 +92,10 @@ CREATE TABLE loan (
     lateFeeCharge DECIMAL CHECK (lateFeeCharge >= 0)
 );
 
-CREATE TABLE reservation (
-    reservationID INT PRIMARY KEY CHECK (reservationID >= 0),
-    memberID INT,
-    FOREIGN KEY (memberID) REFERENCES users(userID) ON DELETE CASCADE,
-    itemID INT,
-    FOREIGN KEY (itemID) REFERENCES media(itemID),
-    reservationDate DATE,
-    expirationDate DATE CHECK (expirationDate >= reservationDate),
-    status ENUM("active", "inactive")
-);
-
 CREATE TABLE fine (
     fineID INT PRIMARY KEY CHECK (fineID >= 0),
     memberID INT,
-    FOREIGN KEY (memberID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (memberID) REFERENCES member(userID) ON DELETE CASCADE,
     loanID INT,
     FOREIGN KEY (loanID) REFERENCES loan(loanID),
     amount DECIMAL CHECK (amount >= 0),
@@ -107,7 +108,74 @@ CREATE TABLE payment (
     fineID INT,
     FOREIGN KEY (fineID) REFERENCES fine(fineID),
     memberID INT,
-    FOREIGN KEY (memberID) REFERENCES users(userID),
+    FOREIGN KEY (memberID) REFERENCES member(userID),
     paymentDate DATE,
-    amountPaid DECIMAL CHECK (amountPaid >= 0)
+    amount DECIMAL CHECK (amount >= 0)
+);
+
+CREATE TABLE reservation (
+    reservationID INT PRIMARY KEY CHECK (reservationID >= 0),
+    memberID INT,
+    FOREIGN KEY (memberID) REFERENCES member(userID) ON DELETE CASCADE,
+    itemID INT,
+    FOREIGN KEY (itemID) REFERENCES media(itemID),
+    reservationDate DATE,
+    expirationDate DATE CHECK (expirationDate >= reservationDate),
+    status ENUM("active", "inactive")
+);
+
+CREATE TABLE loaned_in (
+    loanID INT PRIMARY KEY,
+    FOREIGN KEY (loanID) REFERENCES loan(loanID),
+    itemID INT,
+    FOREIGN KEY (itemID) REFERENCES media(itemID)
+);
+
+CREATE TABLE borrows (
+    loanID INT PRIMARY KEY,
+    FOREIGN KEY (loanID) REFERENCES loan(loanID),
+    memberID INT,
+    FOREIGN KEY (memberID) REFERENCES member(userID)
+);
+
+CREATE TABLE triggers (
+    loanID INT PRIMARY KEY,
+    FOREIGN KEY (loanID) REFERENCES loan(loanID),
+    fineID INT,
+    FOREIGN KEY (fineID) REFERENCES fine(fineID)
+);
+
+CREATE TABLE owes (
+    fineID INT PRIMARY KEY,
+    FOREIGN KEY (fineID) REFERENCES fine(fineID),
+    memberID INT,
+    FOREIGN KEY (memberID) REFERENCES member(userID)
+);
+
+CREATE TABLE pays_for (
+    paymentID INT PRIMARY KEY,
+    FOREIGN KEY (paymentID) REFERENCES payment(paymentID),
+    fineID INT,
+    FOREIGN KEY (fineID) REFERENCES fine(fineID)
+);
+
+CREATE TABLE pays (
+    paymentID INT PRIMARY KEY,
+    FOREIGN KEY (paymentID) REFERENCES payment(paymentID),
+    memberID INT,
+    FOREIGN KEY (memberID) REFERENCES member(userID)
+);
+
+CREATE TABLE reserves (
+    reservationID INT PRIMARY KEY,
+    FOREIGN KEY (reservationID) REFERENCES reservation(reservationID),
+    memberID INT,
+    FOREIGN KEY (memberID) REFERENCES member(userID)
+);
+
+CREATE TABLE reserved_in (
+    reservationID INT PRIMARY KEY,
+    FOREIGN KEY (reservationID) REFERENCES reservation(reservationID),
+    itemID INT,
+    FOREIGN KEY (itemID) REFERENCES media(itemID)
 );
