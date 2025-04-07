@@ -126,56 +126,56 @@ CREATE TABLE reservation (
 
 CREATE TABLE loaned_in (
     loanID INT PRIMARY KEY,
-    FOREIGN KEY (loanID) REFERENCES loan(loanID),
+    FOREIGN KEY (loanID) REFERENCES loan(loanID) ON DELETE CASCADE,
     itemID INT,
-    FOREIGN KEY (itemID) REFERENCES media(itemID)
+    FOREIGN KEY (itemID) REFERENCES media(itemID) ON DELETE CASCADE
 );
 
 CREATE TABLE borrows (
     loanID INT PRIMARY KEY,
-    FOREIGN KEY (loanID) REFERENCES loan(loanID),
+    FOREIGN KEY (loanID) REFERENCES loan(loanID) ON DELETE CASCADE,
     memberID INT,
-    FOREIGN KEY (memberID) REFERENCES member(userID)
+    FOREIGN KEY (memberID) REFERENCES member(userID) ON DELETE CASCADE
 );
 
 CREATE TABLE triggers (
     loanID INT PRIMARY KEY,
-    FOREIGN KEY (loanID) REFERENCES loan(loanID),
+    FOREIGN KEY (loanID) REFERENCES loan(loanID) ON DELETE CASCADE,
     fineID INT,
-    FOREIGN KEY (fineID) REFERENCES fine(fineID)
+    FOREIGN KEY (fineID) REFERENCES fine(fineID) ON DELETE CASCADE
 );
 
 CREATE TABLE owes (
     fineID INT PRIMARY KEY,
-    FOREIGN KEY (fineID) REFERENCES fine(fineID),
+    FOREIGN KEY (fineID) REFERENCES fine(fineID) ON DELETE CASCADE,
     memberID INT,
-    FOREIGN KEY (memberID) REFERENCES member(userID)
+    FOREIGN KEY (memberID) REFERENCES member(userID) ON DELETE CASCADE
 );
 
 CREATE TABLE pays_for (
     paymentID INT PRIMARY KEY,
-    FOREIGN KEY (paymentID) REFERENCES payment(paymentID),
+    FOREIGN KEY (paymentID) REFERENCES payment(paymentID) ON DELETE CASCADE,
     fineID INT,
-    FOREIGN KEY (fineID) REFERENCES fine(fineID)
+    FOREIGN KEY (fineID) REFERENCES fine(fineID) ON DELETE CASCADE
 );
 
 CREATE TABLE pays (
     paymentID INT PRIMARY KEY,
-    FOREIGN KEY (paymentID) REFERENCES payment(paymentID),
+    FOREIGN KEY (paymentID) REFERENCES payment(paymentID) ON DELETE CASCADE,
     memberID INT,
-    FOREIGN KEY (memberID) REFERENCES member(userID)
+    FOREIGN KEY (memberID) REFERENCES member(userID) ON DELETE CASCADE
 );
 
 CREATE TABLE reserves (
     reservationID INT PRIMARY KEY,
-    FOREIGN KEY (reservationID) REFERENCES reservation(reservationID),
+    FOREIGN KEY (reservationID) REFERENCES reservation(reservationID) ON DELETE CASCADE,
     memberID INT,
-    FOREIGN KEY (memberID) REFERENCES member(userID)
+    FOREIGN KEY (memberID) REFERENCES member(userID) ON DELETE CASCADE
 );
 
 CREATE TABLE reserved_in (
     reservationID INT PRIMARY KEY,
-    FOREIGN KEY (reservationID) REFERENCES reservation(reservationID),
+    FOREIGN KEY (reservationID) REFERENCES reservation(reservationID) ON DELETE CASCADE,
     itemID INT,
-    FOREIGN KEY (itemID) REFERENCES media(itemID)
+    FOREIGN KEY (itemID) REFERENCES media(itemID) ON DELETE CASCADE
 );
