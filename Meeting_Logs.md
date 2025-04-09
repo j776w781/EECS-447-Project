@@ -188,4 +188,32 @@
 - Ashley: Find at least 20 pieces of digital media for our database. (Due 4/9) 
 - Nayyir: Clean up the tables already created in librarydb.sql, and make sure there are no errors. Make sure they match the Part 4 document. (Due 4/9)
 
-**Follow Up:** Next meeting scheduled for Wednesday, 4/9 at 5:00 PM
+**Follow Up:** Next meeting scheduled for Wednesday, 4/9 at 5:00 PM  
+
+
+
+## **4/9/2025**  
+**Time:** 5:00 PM  
+**Location:** Virtual(Discord)  
+**Objective:** Discuss current progress with implementation and this week's tasks.   
+**Team Members Present:** Josh, Ashley, Aiham  
+**Tasks Completion Confirmation:**  
+- Josh: Add in all of the remaining relations from Part 4 that haven't been implemented yet. Check for any errors. (Complete)
+- Dylan: Find at least 20 books of varying genres for our database. (Complete)
+- Aiham: Find at least 20 magazines of varying publications for our database. (Complete)
+- Ashley: Find at least 20 pieces of digital media for our database. (Complete) 
+- Nayyir: Clean up the tables already created in librarydb.sql, and make sure there are no errors. Make sure they match the Part 4 document. (Complete)
+
+**Activities:**  
+- 
+
+**Tasks Allocated:**  
+- Josh: Generate 25 users to add to the database. (Due 4/16)
+- Dylan: Standardize your books.md and post to the GitHub repo. (Due 4/16) 
+- Aiham: Standardize your magazines.md and post to the GitHub repo. (Due 4/16)
+- Ashley: Standardize your digitalMedia.md and post to the GitHub repo. (Due 4/16)
+- Nayyir: Generate 25 users to add to the database. (Due 4/16)
+
+**Follow Up:** Next meeting scheduled for Wednesday, 4/16 at 5:00 PM
+
+
