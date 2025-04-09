@@ -196,7 +196,7 @@
 **Time:** 5:00 PM  
 **Location:** Virtual(Discord)  
 **Objective:** Discuss current progress with implementation and this week's tasks.   
-**Team Members Present:** Josh, Ashley, Aiham  
+**Team Members Present:** Josh, Ashley, Aiham, Dylan, Nayyir  
 **Tasks Completion Confirmation:**  
 - Josh: Add in all of the remaining relations from Part 4 that haven't been implemented yet. Check for any errors. (Complete)
 - Dylan: Find at least 20 books of varying genres for our database. (Complete)
@@ -205,7 +205,12 @@
 - Nayyir: Clean up the tables already created in librarydb.sql, and make sure there are no errors. Make sure they match the Part 4 document. (Complete)
 
 **Activities:**  
-- 
+- Confirmed that team members responsible for finding media were able to amass their data.
+- Discussed methods of data entry. Focused on abilities to automatically generate the records in our database. We need to standardize our input files for better script-construction
+- Discussed methods of implementation actions like checkouts and report generation.
+- Each action should be implemented with a template transaction stored in a source file. The source file will take inputs as arguments.
+- Once initial data is added, we will worry about transaction creation.
+- We need 50 users.
 
 **Tasks Allocated:**  
 - Josh: Generate 25 users to add to the database. (Due 4/16)
