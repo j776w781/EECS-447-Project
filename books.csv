@@ -22,3 +22,24 @@
 18,The Raven and Other Poems,Book,2021,TRUE,False,False,9781435171374,Edgar Allan Poe, Gothic
 19,The Odyssey,Book,1488,TRUE,False,False,9780140275360,Homer,Mythology
 20,The Iliad,Book,750,TRUE,False,False,9780141394657,Homer,Mythology
+
+book,01,The Wealth of Nations,Book,1776,TRUE,False,False,9781435172449,Adam Smith,Economics \n
+book,02,The Art of War,Book,750,TRUE,False,False,9789388369695,Sun Tzu, Philosophy \n
+book,03,Blood Meridian,Book,1985,TRUE,False,False,780679728757,Cormac McCarthy, Historical Fiction \n 
+book,04,Crime and Punishment,Book,1866,TRUE,False,False,9780140449136,Fyodor Dostoyevsky, Classic \n
+book,05,Pride and Prejudice,Book,1813,TRUE,False,False,9781435159631,Jane Austin, Romance \n
+book,06,Ender's Game,Book,1985,TRUE,False,False,9781250773029,Orson Scott Card,Science Fiction \n
+book,07,War and Peace,Book,1865,TRUE,False,False,9781400079988,Leo Tolstoy, Historical Fiction \n
+book,08,No Longer Human,Book,1948,TRUE,False,False,9780811204811,Osamu Dazai, Psychological Fiction \n
+book,09,The Great Gatsby,Book,1925,TRUE,False,False,9780743273565,F. Scott Fitzgerald,Classic \n
+book,10,1984,Book,1949,TRUE,False,False,9788499890944,George Orwell, Dystopian \n
+book,11,The Book of Five Rings,Book,1645,TRUE,False,False,9781788883214,Miyamoto Musashi, Philosophy \n
+book,12,The Tell-Tale Heart,Book,1843,TRUE,False,False,9781078754477,Edgar Allan Poe, Gothic \n 
+book,13,The Hobbit,Book,1937,TRUE,False,False,9780547928227,J.R.R. Tolkien, Fantasy \n
+book,14,A Clockwork Orange,Book,1962,TRUE,False,False,9780393341768,Anthony Burgess, Dystopian \n
+book,15,Animal Farm,Book,1945,TRUE,False,False,9780451526342,George Orwell,Political Satire \n
+book,16,The Road,Book,2006,TRUE,False,False,9780307387899,Cormac McCarthy,Fiction \n
+book,17,Heart of Darkness,Book,1899,TRUE,False,False,9780143106586,Joseph Conrad,Historical Fiction
+book,18,The Raven and Other Poems,Book,2021,TRUE,False,False,9781435171374,Edgar Allan Poe, Gothic
+book,19,The Odyssey,Book,1488,TRUE,False,False,9780140275360,Homer,Mythology
+book,20,The Iliad,Book,750,TRUE,False,False,9780141394657,Homer,Mythology
