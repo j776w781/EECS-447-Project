@@ -222,3 +222,29 @@
 **Follow Up:** Next meeting scheduled for Wednesday, 4/16 at 5:00 PM
 
 
+
+## **4/16/2025**  
+**Time:** 5:00 PM  
+**Location:** Virtual(Discord)  
+**Objective:** Discuss current progress with implementation and this week's tasks.   
+**Team Members Present:** Josh, Ashley, Aiham, Dylan, Nayyir  
+**Tasks Completion Confirmation:**  
+- Josh: Generate 25 users to add to the database. (Complete)
+- Dylan: Standardize your books.md and post to the GitHub repo. (Complete) 
+- Aiham: Standardize your magazines.md and post to the GitHub repo. (Complete)
+- Ashley: Standardize your digitalMedia.md and post to the GitHub repo. (Complete)
+- Nayyir: Generate 25 users to add to the database. ()  
+
+
+**Activities:**  
+- asdasdf
+
+**Tasks Allocated:**  
+- Josh: 
+- Dylan:  
+- Aiham: 
+- Ashley: 
+- Nayyir: adfasdf
+
+**Follow Up:** Next meeting scheduled for Wednesday, 4/23 at 5:00 PM
+
