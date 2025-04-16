@@ -237,14 +237,21 @@
 
 
 **Activities:**  
-- asdasdf
+- Discussed the Python scripts developed to populate the tables.
+- Discussed populating other tables(Fines, loans, reservations, payments)
+- Goal to generate at least 20 loans.
+- 25% should be returned late. (generate a fine entry for those)
+- 20% of the subsequent fines should be outstanding (unpaid)
+- Have at least 10 reservations(50% are inactive)
+- Discussed using a Python interface for user interaction with the database. This would allow us to implement separate user interfaces for staff, admin, and members.
+  
 
 **Tasks Allocated:**  
-- Josh: 
-- Dylan:  
-- Aiham: 
-- Ashley: 
-- Nayyir: adfasdf
+- Josh: Populate the Loan, payment and fine tables. (Due 4/23)
+- Dylan: Populate the reservation table. (Due 4/23)
+- Aiham: Run your script to build user, media, book, digitalMedia, and magazine tables.(Due 4/23)
+- Ashley: Brainstorm the queries required to perform the Collection Analysis report.(Due 4/23)
+- Nayyir: Brainstorm the queries required to perform the Problem Member Analysis report.(Due 4/23)
 
 **Follow Up:** Next meeting scheduled for Wednesday, 4/23 at 5:00 PM
 
