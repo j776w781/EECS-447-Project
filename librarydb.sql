@@ -76,7 +76,7 @@ CREATE TABLE digitalMedia (
 CREATE TABLE magazine (
     magazineID INT PRIMARY KEY,
     FOREIGN KEY (magazineID) REFERENCES media(itemID) ON DELETE CASCADE,
-    issn INT CHECK (issn > 0),
+    issn VARCHAR(100),
     publicationDate DATE
 );
 
