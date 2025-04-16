@@ -1,0 +1,20 @@
+Book,01,The Wealth of Nations,book,1776,available,0,common,1,9781435172449,Adam Smith,Economics
+Book,02,The Art of War,book,750,available,0,common,2,9789388369695,Sun Tzu, Philosophy
+Book,03,Blood Meridian,book,1985,available,0,common,3,780679728757,Cormac McCarthy, Historical Fiction 
+Book,04,Crime and Punishment,book,1866,available,0,common,4,9780140449136,Fyodor Dostoyevsky, Classic
+Book,05,Pride and Prejudice,book,1813,available,0,common,5,9781435159631,Jane Austin, Romance
+Book,06,Ender's Game,book,1985,available,0,common,6,9781250773029,Orson Scott Card,Science Fiction
+Book,07,War and Peace,book,1865,available,0,common,7,9781400079988,Leo Tolstoy, Historical Fiction
+Book,08,No Longer Human,book,1948,available,0,common,8,9780811204811,Osamu Dazai, Psychological Fiction
+Book,09,The Great Gatsby,book,1925,available,0,common,9,9780743273565,F. Scott Fitzgerald,Classic
+Book,10,1984,book,1949,available,0,common,10,9788499890944,George Orwell, Dystopian
+Book,11,The book of Five Rings,book,1645,available,0,common,11,9781788883214,Miyamoto Musashi, Philosophy
+Book,12,The Tell-Tale Heart,book,1843,available,0,common,12,9781078754477,Edgar Allan Poe, Gothic 
+Book,13,The Hobbit,book,1937,available,0,common,13,9780547928227,J.R.R. Tolkien, Fantasy
+Book,14,A Clockwork Orange,book,1962,available,0,common,14,9780393341768,Anthony Burgess, Dystopian
+Book,15,Animal Farm,book,1945,available,0,common,15,9780451526342,George Orwell,Political Satire
+Book,16,The Road,book,2006,available,0,common,16,9780307387899,Cormac McCarthy,Fiction
+Book,17,Heart of Darkness,book,1899,available,0,common,17,9780143106586,Joseph Conrad,Historical Fiction
+Book,18,The Raven and Other Poems,book,2021,available,0,common,18,9781435171374,Edgar Allan Poe, Gothic
+Book,19,The Odyssey,book,1488,available,0,common,19,9780140275360,Homer,Mythology
+Book,20,The Iliad,book,750,available,0,common,20,9780141394657,Homer,Mythology

@@ -1,5 +1,3 @@
-//user_id, name, phoneNumber, emailAddress, physicalAddress, userType, accountStatus
-
 01, Alham Aihmoud, 913-123-4567, aaihmoud@email.com, 123 Main St Springfield IL 62701, member, active
 02, Dalan Dyvis, 914-234-5678, ddyvis@email.com, 456 Elm St Albany NY 12207, member, active
 03, Woshua Jelicky, 915-345-6789, wjelicky@email.com, 789 Oak St Madison WI 53703, member, active
