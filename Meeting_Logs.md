@@ -233,7 +233,7 @@
 - Dylan: Standardize your books.md and post to the GitHub repo. (Complete) 
 - Aiham: Standardize your magazines.md and post to the GitHub repo. (Complete)
 - Ashley: Standardize your digitalMedia.md and post to the GitHub repo. (Complete)
-- Nayyir: Generate 25 users to add to the database. ()  
+- Nayyir: Generate 25 users to add to the database. (Complete)  
 
 
 **Activities:**  
