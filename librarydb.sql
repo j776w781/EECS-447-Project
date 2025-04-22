@@ -60,7 +60,7 @@ CREATE TABLE media (
 CREATE TABLE book (
     itemID INT PRIMARY KEY,
     FOREIGN KEY (itemID) REFERENCES media(itemID) ON DELETE CASCADE,
-    ISBN INT CHECK (ISBN > 0),
+    ISBN BIGINT CHECK (ISBN > 0),
     author VARCHAR(100),
     genre VARCHAR(100)
 );
