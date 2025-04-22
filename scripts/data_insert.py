@@ -20,6 +20,10 @@ class CursorLogger:
         printv(f"Executing query: {query} with values: {values}")
         if self.cursor:
             self.cursor.execute(query, values)
+    def fetchone(self):
+        if self.cursor:
+            return self.cursor.fetchone()
+        return None
 class ConnectionLogger:
     def __init__(self, conn=None):
         self.conn = conn
@@ -64,7 +68,6 @@ books_columns = [("itemID", int), ("ISBN", int), ("author", str), ("genre", str)
 digital_media_columns = [("itemID", int), ("digitalMediaID", int), ("creator", str), ("genre", str)]
 magazine_columns = [("magazineID", int), ("issn", str), ("publicationDate", str)]
 
-# TODO For media types, we need to check the itemID and make sure it is not taken in the media table.
 def insert_book(book):
     # Check if there is an extra type indicator at the beginning.
     # Expected total tokens: media (7) + child (len(child_columns))
@@ -77,14 +80,14 @@ def insert_book(book):
         raise ValueError(f"Row does not have the expected number of tokens: {book}")
 
     # Prepare data for media insert.
-    insert_media(book[:len(media_columns)])
+    itemID = insert_media(book[:len(media_columns)])
 
     # Prepare data for the child table. We enforce that the first column (itemID or magazineID)
     # must match the media itemID. If the CSV provided a child itemID that differs, we override it.
     child_tokens = book[len(media_columns):]
     child_values = []
     # Set first column from media's itemID.
-    child_values.append(book[0])
+    child_values.append(itemID)
     # Process remaining child columns.
     for i, (col, col_type) in enumerate(books_columns[1:], start=1):
         val = child_tokens[i]
@@ -106,11 +109,11 @@ def insert_digital_media(digital_media):
     if len(digital_media) != expected:
         raise ValueError(f"Row does not have the expected number of tokens: {digital_media}")
 
-    insert_media(digital_media[:len(media_columns)])
+    itemID = insert_media(digital_media[:len(media_columns)])
 
     child_tokens = digital_media[len(media_columns):]
     child_values = []
-    child_values.append(digital_media[0])
+    child_values.append(itemID)
     for i, (col, col_type) in enumerate(digital_media_columns[1:], start=1):
         val = child_tokens[i]
         if col_type == int:
@@ -131,11 +134,11 @@ def insert_magazine(magazine):
     if len(magazine) != expected:
         raise ValueError(f"Row does not have the expected number of tokens: {magazine}")
 
-    insert_media(magazine[:len(media_columns)])
+    itemID = insert_media(magazine[:len(media_columns)])
 
     child_tokens = magazine[len(media_columns):]
     child_values = []
-    child_values.append(magazine[0])
+    child_values.append(itemID)
     for i, (col, col_type) in enumerate(magazine_columns[1:], start=1):
         val = child_tokens[i]
         if col_type == int:
@@ -192,9 +195,19 @@ def insert_media(media):
             values.append(float(val))
         else:
             values.append(val)
-    
+
+    # Find last itemID in the media table and increment it.
+    cur.execute("SELECT MAX(itemID) FROM media")
+    result = cur.fetchone()
+    if result[0] is None:
+        itemID = values[0]
+    else:
+        itemID = result[0] + 1
+    values[0] = itemID # Set the itemID to the new value.
+
     query = f"INSERT INTO media VALUES (" + ", ".join(["%s"] * len(media_columns)) + ")"
     cur.execute(query, values)
+    return itemID
 
 def insert_table(table_name, input_file):
     """
