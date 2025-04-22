@@ -12,6 +12,7 @@ def printv(msg):
         print(msg)
 
 conn = None
+cur = None
 class CursorLogger:
     def __init__(self, cursor=None):
         self.cursor = cursor
@@ -51,8 +52,11 @@ else:
     cur = CursorLogger(conn.cursor())
 
 # Define the columns for each table
-user_columns = [("user_id", int), ("name", str), ("phoneNumber", str), ("emailAddress", str), \
+user_columns = [("userID", int), ("name", str), ("phoneNumber", str), ("emailAddress", str), \
                 ("physicalAddress", str), ("userType", str), ("accountStatus", str)]
+member_columns = [("userID", int), ("typeNAME", str), ("borrowingLimit", int), ("lateFeeRate", float)]
+admin_columns = [("userID", int)]
+staff_columns = [("userID", int)]
 
 media_columns = [("itemID", int), ("title", str), ("itemType", str), ("publicationYear", int), \
                  ("availabilityStatus", str), ("specialPremium", float), ("specialRestriction", str)]
@@ -148,8 +152,6 @@ def insert_user(user):
     if len(user) != len(user_columns):
         raise ValueError(f"Row does not have the expected number of tokens: {user}")
 
-    # TODO check type of user and insert into the correct table.
-
     values = []
     for i, (col, col_type) in enumerate(user_columns):
         val = user[i]
@@ -159,9 +161,23 @@ def insert_user(user):
             values.append(float(val))
         else:
             values.append(val)
-    
+
     query = f"INSERT INTO user VALUES (" + ", ".join(["%s"] * len(user_columns)) + ")"
     cur.execute(query, values)
+
+    if user[5] == "admin":
+        admin_query = f"INSERT INTO admin VALUES (" + ", ".join(["%s"] * len(admin_columns)) + ")"
+        admin_values = [values[0]]
+        cur.execute(admin_query, admin_values)
+    elif user[5] == "staff":
+        staff_query = f"INSERT INTO staff VALUES (" + ", ".join(["%s"] * len(staff_columns)) + ")"
+        staff_values = [values[0]]  # Adjust this based on staff_columns
+        cur.execute(staff_query, staff_values)
+    elif user[5] == "member":
+        # TODO also insert into member table.
+        pass
+    else:
+        printv(f"Unknown user type: {user[5]}")
 
 def insert_media(media):
     if len(media) != len(media_columns):
