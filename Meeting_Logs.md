@@ -271,7 +271,9 @@
 
 
 **Activities:**  
-- asd;lkjasdf;lkj
+- Introduced and discussed library.py, the user's interface to the database.
+- Discussed progress on the Collection Analysis and Problem Member Analysis reports and how they can be incorporated in the library.py file.
+- Discussed remaining database tasks, including populating the "relationship tables"
   
 
 **Tasks Allocated:**  
@@ -281,6 +283,6 @@
 - Ashley: Implement the collection_analysis() function in library.py. (Due before demo)
 - Nayyir: Implement the problem_member() function in library.py. (Due before demo)
 
-**Follow Up:** Tentative next meeting 4/30 5PM.
+**Follow Up:** Tentative next meeting 4/30 at 5PM.
 
 
