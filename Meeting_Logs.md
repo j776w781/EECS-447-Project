@@ -253,5 +253,34 @@
 - Ashley: Brainstorm the queries required to perform the Collection Analysis report.(Due 4/23)
 - Nayyir: Brainstorm the queries required to perform the Problem Member Analysis report.(Due 4/23)
 
-**Follow Up:** Next meeting scheduled for Wednesday, 4/23 at 5:00 PM
+**Follow Up:** Next meeting scheduled for Wednesday, 4/23 at 5:00 PM  
+
+
+
+## **4/23/2025**  
+**Time:** 5:00 PM  
+**Location:** Virtual(Discord)  
+**Objective:** Discuss current progress with implementation and this week's tasks.   
+**Team Members Present:**   
+**Tasks Completion Confirmation:**  
+- Josh: Populate the Loan, payment and fine tables. (Complete)
+- Dylan: Populate the reservation table. (Due 4/23)
+- Aiham: Run your script to build user, media, book, digitalMedia, and magazine tables.(Complete)
+- Ashley: Brainstorm the queries required to perform the Collection Analysis report.(Due 4/23)
+- Nayyir: Brainstorm the queries required to perform the Problem Member Analysis report.(Due 4/23)  
+
+
+**Activities:**  
+- asd;lkjasdf;lkj
+  
+
+**Tasks Allocated:**  
+- Josh: 
+- Dylan: 
+- Aiham: 
+- Ashley: 
+- Nayyir: 
+
+**Follow Up:** ?
+
 
