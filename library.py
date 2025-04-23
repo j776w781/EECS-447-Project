@@ -5,14 +5,6 @@ First two lines only needed if not using the method Aiham came up with.
 #sys.path.insert(0, '../library_project/mysql-connector-python/lib')
 import mysql.connector
 
-conn = mysql.connector.connect(
-    user="447s25_j776w781",
-    password="ohN7iewa",
-    host="mysql.eecs.ku.edu",
-    port=3306,
-    database="447s25_j776w781"
-)
-
 class Staff:
     def __init__(self, id, cur):
         self.ID = id
@@ -196,11 +188,11 @@ class Interface:
                 stay_on = 1
                 while stay_on == 1:
                     stay_on = staff.front_end()
-                    conn.commit()
-            conn.close()
+                    self.conn.commit()
+            self.conn.close()
         except Exception as e:
             print(f"Error: {e}")
-            conn.close()
+            self.conn.close()
 
 
 
