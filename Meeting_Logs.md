@@ -261,13 +261,13 @@
 **Time:** 5:00 PM  
 **Location:** Virtual(Discord)  
 **Objective:** Discuss current progress with implementation and this week's tasks.   
-**Team Members Present:**   
+**Team Members Present:** Josh, Ashley, Dylan, Nayyir  
 **Tasks Completion Confirmation:**  
 - Josh: Populate the Loan, payment and fine tables. (Complete)
-- Dylan: Populate the reservation table. (Due 4/23)
+- Dylan: Populate the reservation table. (Complete)
 - Aiham: Run your script to build user, media, book, digitalMedia, and magazine tables.(Complete)
-- Ashley: Brainstorm the queries required to perform the Collection Analysis report.(Due 4/23)
-- Nayyir: Brainstorm the queries required to perform the Problem Member Analysis report.(Due 4/23)  
+- Ashley: Brainstorm the queries required to perform the Collection Analysis report.(Complete)
+- Nayyir: Brainstorm the queries required to perform the Problem Member Analysis report.(Complete)  
 
 
 **Activities:**  
@@ -275,12 +275,12 @@
   
 
 **Tasks Allocated:**  
-- Josh: 
-- Dylan: 
-- Aiham: 
-- Ashley: 
-- Nayyir: 
+- Josh: Create Part 5 document, fill in all "relationship tables", finish up staff and user interfaces in library.py(Due 4/27)
+- Dylan: Upload your reservation.csv file to the GitHub repo. (Due 4/25)
+- Aiham: Complete the Print Physical Schema section of the Part 5 document. (Due 4/27)
+- Ashley: Implement the collection_analysis() function in library.py. (Due before demo)
+- Nayyir: Implement the problem_member() function in library.py. (Due before demo)
 
-**Follow Up:** ?
+**Follow Up:** Tentative next meeting 4/30 5PM.
 
 
