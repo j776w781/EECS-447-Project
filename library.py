@@ -1,5 +1,8 @@
-import sys
-sys.path.insert(0, '../library_project/mysql-connector-python/lib')
+'''
+First two lines only needed if not using the method Aiham came up with.
+'''
+#import sys
+#sys.path.insert(0, '../library_project/mysql-connector-python/lib')
 import mysql.connector
 
 conn = mysql.connector.connect(
@@ -14,7 +17,9 @@ class Staff:
     def __init__(self, id, cur):
         self.ID = id
         self.cur = cur
-    
+
+    #Allows a staff member to insert a media item without needing to directly interact with database.
+    #Includes functionality for adding a copy of an already existing media item (two copies of The Hobbit)
     def insert_media(self):
         query = "SELECT MAX(itemID) FROM media"
         self.cur.execute(query)
@@ -27,6 +32,7 @@ class Staff:
 
         copy = input("\nAdding copy?(yes/no): ")
 
+        #Manual entry for a media item.
         if copy == "no":
             title = input("\nTitle: ")
             type = input("book, digital, or magazine: ")
@@ -52,13 +58,12 @@ class Staff:
                 print("Invalid Type")
                 return
 
-
+        #When adding a copy, the user inputs the itemID of a valid item. It then looks up all the identical information.
         else:
             copy_id = int(input("Enter ID of existing media item: "))
             query = "SELECT title,itemType,publicationYear,availabilityStatus,specialPremium,specialRestriction FROM media WHERE itemID=%s"
             self.cur.execute(query, (copy_id,))
             result = self.cur.fetchall()
-
             if len(result) == 1:
                 for (ttl, typ, yr, avs, sp, sr) in result:
                     title = ttl
@@ -124,7 +129,7 @@ class Staff:
 
 
 
-
+    #Will add more functions for other options (checkout, user management, etc).
     def front_end(self):
         print("Choose you option:\n1:Add Media\n2:Checkout Media\n3:Process Return\n4:Process Payment\n5:Exit")
         choice = int(input("Enter choice(number): "))
@@ -160,6 +165,8 @@ class Interface:
                 )
         self.cur = conn.cursor()
 
+    #Login feature. User must input a valid ID that appears in the user table. 
+    #Returns an integer representing the user's type.
     def log_on(self):
         id = int(input("Enter your userID: "))
         query = "SELECT userType from user WHERE userID='%s'"
@@ -183,6 +190,7 @@ class Interface:
         try:
             print("Connection successful")
             usertype = self.log_on()
+            #Will implement functionality for member as well.
             if usertype == 0:
                 staff = Staff(id, self.cur)
                 stay_on = 1
@@ -203,5 +211,4 @@ class Interface:
 def main():
     interface = Interface()
     interface.run()
-
 main()
