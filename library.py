@@ -155,7 +155,7 @@ class Interface:
                     port=3306,
                     database="447s25_j776w781"
                 )
-        self.cur = conn.cursor()
+        self.cur = self.conn.cursor()
 
     #Login feature. User must input a valid ID that appears in the user table. 
     #Returns an integer representing the user's type.
