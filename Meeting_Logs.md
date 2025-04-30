@@ -261,7 +261,7 @@
 **Time:** 5:00 PM  
 **Location:** Virtual(Discord)  
 **Objective:** Discuss current progress with implementation and this week's tasks.   
-**Team Members Present:** Josh, Ashley, Dylan, Nayyir  
+**Team Members Present:** Josh, Ashley, Dylan, Nayyir, Aiham  
 **Tasks Completion Confirmation:**  
 - Josh: Populate the Loan, payment and fine tables. (Complete)
 - Dylan: Populate the reservation table. (Complete)
@@ -284,5 +284,34 @@
 - Nayyir: Implement the problem_member() function in library.py. (Due before demo)
 
 **Follow Up:** Tentative next meeting 4/30 at 5PM.
+
+
+
+## **4/30/2025**  
+**Time:** 5:00 PM  
+**Location:** Virtual(Discord)  
+**Objective:** Discuss demo details   
+**Team Members Present:** Josh,   
+**Tasks Completion Confirmation:**  
+- Josh: Create Part 5 document, fill in all "relationship tables", finish up staff and user interfaces in library.py(Complete.ongoing)
+- Dylan: Upload your reservation.csv file to the GitHub repo. (Complete)
+- Aiham: Complete the Print Physical Schema section of the Part 5 document. (Complete)
+- Ashley: Implement the collection_analysis() function in library.py. (Ongoing)
+- Nayyir: Implement the problem_member() function in library.py. (Ongoing)  
+
+
+**Activities:**  
+- The demonstration will be conducted in person on May 5th, 2025, at 1:30 PM with TA Ajay Jarugula in Eaton 2005B.
+- ;ljl;j
+  
+
+**Tasks Allocated:**  
+- Josh:
+- Dylan: 
+- Aiham: 
+- Ashley: 
+- Nayyir: 
+
+**This concludes the team meetings. Team Administrator Josh Welicky will conduct the demonstration as scheduled.**
 
 
