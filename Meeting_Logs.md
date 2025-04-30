@@ -312,6 +312,7 @@
 - Ashley: 
 - Nayyir: 
 
-**This concludes the team meetings. Team Administrator Josh Welicky will conduct the demonstration as scheduled.**
+**This concludes the team meetings. Team Administrator Josh Welicky will conduct the demonstration as scheduled. He will also update the "Tasks Allocated" section to indicated
+individual completion of duties after the demonstration has concluded.**
 
 
