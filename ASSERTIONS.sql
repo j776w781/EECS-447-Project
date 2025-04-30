@@ -1,8 +1,0 @@
---This is a file that will hold all the assertions that are in line with library policy.
---Initial list of assertions to implement once users and media has been inserted.
---I want to do this before we start generating loans/fines/reservations/payments
---Assertions we need:
---members can not have a number of active loans higher than their borrowing limit.
---Return date can't be earlier than loan date
---due date can't be earlier than loan date
---A media item cannot be loaned if it is currently unavailable.
