@@ -7,7 +7,7 @@ import mysql.connector
 import datetime
 
 
-class Member:
+class User:
     def __init__(self, id, cur):
         self.ID = id
         self.cur = cur
@@ -90,7 +90,6 @@ class Member:
         value = input(f"What should the {params[new_media_choice][param]} be: ")
         try:
             value = int(value)
-            print("INTED")
         except ValueError:
             value = value
 
@@ -121,6 +120,13 @@ class Member:
             print("Invalid choice. Try again!")
 
 
+    
+
+
+
+class Member(User):
+    def __init__(self, id, cur):
+        super().__init__(id,cur)
 
     def reserve(self):
         #Obtain item id from user.
@@ -195,13 +201,6 @@ class Member:
             print("Reservation made. Thank you!")
         else:
             print("Reservation cancelled.")
-
-
-
-        
-
-
-
         return
 
 
@@ -239,10 +238,55 @@ class Member:
 
 
 
-class Staff:
+class Staff(User):
     def __init__(self, id, cur):
-        self.ID = id
-        self.cur = cur
+        super().__init__(id,cur)
+
+
+
+
+    def process_return(self):
+        itemID = int(input("\nEnter Item ID: "))
+        self.cur.execute("SELECT * FROM loan WHERE returnDate IS NULL AND itemID=%s", (itemID,))
+        loan_result = self.cur.fetchone()
+        if loan_result == None:
+            print("No active loan for that member\n")
+            return
+        loanID = loan_result[0]
+        memberID = loan_result[1]
+        itemID = loan_result[2]
+        checkoutDate = loan_result[3]
+        dueDate = loan_result[4]
+        lateFeeRate = loan_result[6]
+
+        today = datetime.date.today()
+
+        print(f"\nProcessing return for loan {loanID}")
+        if lateFeeRate != 0:
+            print("Overdue return detected.")
+
+        choice = input("Confirm return?(yes/no): ")
+        if choice == "yes":
+            self.cur.execute("UPDATE loan SET returnDate=%s WHERE loanID=%s", (str(today), loanID,))
+            self.cur.execute("UPDATE media SET availabilityStatus='available' WHERE itemID=%s", (itemID,))
+            if lateFeeRate != 0:
+                query = "SELECT MAX(fineID) FROM fine"
+                self.cur.execute(query)
+                result = self.cur.fetchall()
+                max = None
+                for (num,) in result:
+                    max = num
+                fineID = max + 1
+
+                self.cur.execute("INSERT INTO fine VALUES (%s,%s,%s,%s,%s,%s)", (fineID,memberID,loanID,lateFeeRate,"unpaid"))
+                self.cur.execute("INSERT INTO triggers VALUES (%s,%s)", (loanID,fineID))
+                self.cur.execute("INSERT INTO owes VALUES (%s,%s)", (fineID,memberID))
+            print("Return successful.")
+
+        else:
+            print("Return Cancelled.")
+
+        return
 
 
     def checkout(self):
@@ -288,8 +332,6 @@ class Staff:
             print("No matching member found.")
             return
         
-
-
         itemID = int(input("Enter Item ID: "))
         query = "SELECT * FROM media WHERE itemID=%s"
         self.cur.execute(query, (itemID,))
@@ -314,8 +356,15 @@ class Staff:
                 return
         
         
-        today = datetime.date.today()
-        dueDate = today + datetime.timedelta(days=14)
+        datechoice = input("Manually enter Checkout and Due Dates? (yes/no): ")
+        if datechoice == 'yes':
+            today = input("Enter checkout date in Year-Month-Day Format: ")
+            dueDate = input("Enter due date in Year-Month-Day Format: ")
+        else:
+            today = datetime.date.today()
+            dueDate = today + datetime.timedelta(days=14)
+
+
         
         choice = input(f"\nConfirm(yes/no):\nLoan ID: {loanID}\nMember ID: {memberID}\nItem ID: {itemID}\nCheckout Date: {today}\nDue Date: {dueDate}\nEnter choice: ")
 
@@ -461,13 +510,17 @@ class Staff:
 
     #Will add more functions for other options (checkout, user management, etc).
     def front_end(self):
-        print("\nChoose you option:\n1:Add Media\n2:Checkout Media\n3:Process Return\n4:Process Payment\n5:Exit")
+        print("\nChoose you option:\n1:Add Media\n2:Checkout Media\n3:Process Return\n4:Process Payment\n5:Search Media\n6:Exit")
         choice = input("Enter choice(number): ")
         if choice == '1':
             self.insert_media()
         elif choice == '2':
             self.checkout()
+        elif choice == '3':
+            self.process_return()
         elif choice == '5':
+            self.search_interface()
+        elif choice == '6':
             print("Have a nice day!")
             return 0
         else:
@@ -499,6 +552,14 @@ class Interface:
                 )
         self.cur = self.conn.cursor()
 
+
+    def update(self):
+        today = datetime.date.today()
+        self.cur.execute("UPDATE reservation SET status='inactive' WHERE status='active' AND expirationDate < DATE(%s)", (str(today),))
+
+
+        self.conn.commit()
+
     #Login feature. User must input a valid ID that appears in the user table. 
     #Returns an integer representing the user's type.
     def log_on(self):
@@ -514,7 +575,6 @@ class Interface:
                 userType = type
                 uname = name
 
-
             if userType == "staff":
                 return 0,id,uname
             elif userType == "member":
@@ -527,6 +587,7 @@ class Interface:
     
     def run(self):
         try:
+            self.update()
             print("Welcome!")
             userType,id,name = self.log_on()
             print(f"Hello {name}!")
