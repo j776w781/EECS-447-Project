@@ -70,7 +70,8 @@ for member_id in all_members:
     currently_borrowing = member_id in cur_borrow_set
 
     #flag as problem member if they have 3 or more overdue loans or 2 or more unpaid fines
-    is_problem_member = overdue_count >= 3 or unpaid_fines_count >= 2
+    #is_problem_member = overdue_count >= 3 or unpaid_fines_count >= 2
+    is_problem_member = overdue_count >= 1 or unpaid_fines_count >= 1
     #recommend deactivation if they are a problem member and not currently borrowing
     recommendation = is_problem_member and not currently_borrowing #recommend d
 
