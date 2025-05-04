@@ -73,7 +73,7 @@ for member_id in all_members:
     #is_problem_member = overdue_count >= 3 or unpaid_fines_count >= 2
     is_problem_member = overdue_count >= 1 or unpaid_fines_count >= 1
     #recommend deactivation if they are a problem member and not currently borrowing
-    recommendation = is_problem_member and not currently_borrowing #recommend d
+    recommendation = is_problem_member and not currently_borrowing 
 
     if is_problem_member:
         print(f"Member ID: {member_id}")

@@ -1,5 +1,6 @@
 import mysql.connector
 import argparse
+import random
 
 parser = argparse.ArgumentParser(prog="data_insert.py")
 parser.add_argument('--demo', action=argparse.BooleanOptionalAction, help='If you are not on cycle servers, use this flag to run in demo mode.')
@@ -204,6 +205,14 @@ def insert_media(media):
     else:
         itemID = result[0] + 1
     values[0] = itemID # Set the itemID to the new value.
+
+    #RANDOMIZE AVAILABILITY STATUS
+    availability = random.choice(["available", "on hold", "checked out"])
+    values[4] = availability
+
+    #RANDOMIZE SPECIAL PREMIUM
+    special_premium = random.uniform(0, 20)
+    values[5] = special_premium
 
     query = f"INSERT INTO media VALUES (" + ", ".join(["%s"] * len(media_columns)) + ")"
     cur.execute(query, values)
