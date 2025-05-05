@@ -13,66 +13,54 @@ def collection_analysis():
 
     print("\n------ COLLECTION ANALYSIS REPORT ------\n")
 
-    # 1. Most Frequently Borrowed Items
-    print("Top 10 Most Frequently Borrowed Items:")
+    # 1. All Items by Borrow Frequency (Descending)
+    print("All Items by Borrow Frequency:")
     cursor.execute("""
-        SELECT m.itemID, m.title, COUNT(l.loanID) AS borrowCount
-        FROM media m
-        JOIN loan l ON m.itemID = l.itemID
-        GROUP BY m.itemID
-        ORDER BY borrowCount DESC
-        LIMIT 10;
-    """)
-    for itemID, title, count in cursor.fetchall():
-        print(f"Item ID: {itemID}, Title: {title}, Times Borrowed: {count}")
-    print()
-
-    # 2. Least Frequently Borrowed Items
-    print("Top 10 Least Frequently Borrowed Items:")
-    cursor.execute("""
-        SELECT m.itemID, m.title, COUNT(l.loanID) AS borrowCount
+        SELECT m.itemID, m.title, COUNT(l.itemID) AS loan_count
         FROM media m
         LEFT JOIN loan l ON m.itemID = l.itemID
-        GROUP BY m.itemID
-        HAVING borrowCount > 0
-        ORDER BY borrowCount ASC
-        LIMIT 10;
+        GROUP BY m.itemID, m.title
+        ORDER BY loan_count DESC;
     """)
     for itemID, title, count in cursor.fetchall():
         print(f"Item ID: {itemID}, Title: {title}, Times Borrowed: {count}")
     print()
 
-    # 3. Items Most Often Returned Late
-    print("Items Most Often Returned Late:")
+    # 2. Most Under-Utilized Genre (Books with no loans)
+    print("Most Under-Utilized Book Genre (Never Loaned):")
     cursor.execute("""
-        SELECT m.itemID, m.title, COUNT(*) AS lateReturns
+        SELECT b.genre, COUNT(*) AS unloaned_count
         FROM media m
-        JOIN loan l ON m.itemID = l.itemID
-        WHERE l.returnDate > l.dueDate
-        GROUP BY m.itemID
-        ORDER BY lateReturns DESC
-        LIMIT 10;
+        JOIN book b ON m.itemID = b.itemID
+        LEFT JOIN loan l ON m.itemID = l.itemID
+        WHERE l.itemID IS NULL
+        GROUP BY b.genre
+        ORDER BY unloaned_count DESC
+        LIMIT 1;
     """)
-    for itemID, title, count in cursor.fetchall():
-        print(f"Item ID: {itemID}, Title: {title}, Late Returns: {count}")
+    result = cursor.fetchone()
+    if result:
+        print(f"Genre: {result[0]}, Unloaned Books: {result[1]}")
+    else:
+        print("No unloaned genres found.")
     print()
 
-    # 4. Collection Circulation Summary
-    print("Collection Circulation Summary:")
-    cursor.execute("SELECT COUNT(*) FROM media;")
-    total_items = cursor.fetchone()[0]
-
-    cursor.execute("SELECT COUNT(DISTINCT itemID) FROM loan;")
-    items_borrowed = cursor.fetchone()[0]
-
-    if total_items > 0:
-        circulation_rate = (items_borrowed / total_items) * 100
+    # 3. Most Under-Utilized Media Type (Never Loaned)
+    print("Most Under-Utilized Media Type (Never Loaned):")
+    cursor.execute("""
+        SELECT m.itemType, COUNT(*) AS unloaned_count
+        FROM media m
+        LEFT JOIN loan l ON m.itemID = l.itemID
+        WHERE l.itemID IS NULL
+        GROUP BY m.itemType
+        ORDER BY unloaned_count DESC
+        LIMIT 1;
+    """)
+    result = cursor.fetchone()
+    if result:
+        print(f"Media Type: {result[0]}, Unloaned Items: {result[1]}")
     else:
-        circulation_rate = 0
-
-    print(f"Total Items in Collection: {total_items}")
-    print(f"Items Borrowed At Least Once: {items_borrowed}")
-    print(f"Circulation Rate: {circulation_rate:.2f}%")
+        print("No unloaned media types found.")
     print()
 
     cursor.close()
