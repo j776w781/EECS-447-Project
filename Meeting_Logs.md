@@ -307,7 +307,7 @@
   
 
 **Tasks Allocated:**  
-- Josh: Implement the other four implemented reports in SQL. Write the queries and output in the Part 6 document. Implement notification features on the library.py file. Turn in the Part 6 document by 11:59 PM on May 4th. Give the demo. (Due 5/4 and 5/5)
+- Josh: Implement the other four implemented reports in SQL. Write the queries and output in the Part 6 document. Implement notification features on the library.py file. Turn in the Part 6 document by 11:59 PM on May 4th. Give the demo. (Due 5/4 and 5/5) (Complete)
 - Dylan: Implement the first four unimplemented sample queries in SQL. Write the queries and output in the Part 6 document. (Due 5/4) (Complete)
 - Aiham: Implement the last two unimplemented sample queries, and the monthly summary report and statistics breakdown in SQL. Write the queries and output in the Part 6 document. (Due 5/4) (Complete)
 - Ashley: Integrate collection_analysis.py into the library.py program. Copy/paste the queries needed into the Part 6 document. (Due 5/4) (Complete)
