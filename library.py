@@ -119,6 +119,60 @@ class User:
         else:
             print("Invalid choice. Try again!")
 
+    def update_contact_info(self):
+        self.cur.execute("SELECT name, phoneNumber, emailAddress, physicalAddress FROM user WHERE userID=%s", (self.ID,))
+        profile = self.cur.fetchone()
+        name = profile[0]
+        phone = profile[1]
+        email = profile[2]
+        addr = profile[3]
+        contact_info = [phone, email, addr]
+        contact_names = ["phoneNumber", "emailAddress", "physicalAddress"]
+        print(f"\nCurrent Profile:\nUserID: {self.ID}\nName: {name}\nPhone Number: {phone}\nEmail Address: {email}\nMailing Address: {addr}\n")
+        change = input("Do you want to make changes to your contact information?(yes/no): ")
+        if change == "yes":
+            filled_in = 0
+            for info in contact_info:
+                if info != None:
+                    filled_in += 1
+            delete = input(f"\nWould you like to delete contact information?(yes/no): ")
+            if delete == "yes":
+                if filled_in > 1:
+                    choice = input("\nChoose info to delete.\n0:Phone Number\n1:Email\n2:Address\nEnter number: ")
+                    if choice in ['0', '1', '2']:
+                        choice = int(choice)
+                        confirm = input(f"Are you sure you want to delete your {contact_names[choice]}?(yes/no): ")
+                        if confirm == "yes":
+                            self.cur.execute(f"UPDATE user SET {contact_names[choice]}=NULL WHERE userID=%s", (self.ID,))
+                            print("Changes made.")
+                        else:
+                            print("Changes cancelled.")
+                            return
+                    else:
+                        print("Invalid choice.")
+                        return
+                else:
+                    print("You must have at least one form of contact information.")
+                    return
+            else:
+                choice = input("\nChoose info to change\n0:Phone Number\n1:Email\n2:Address\nEnter number: ")
+                if choice in ['0', '1', '2']:
+                    choice = int(choice)
+                    entry = input(f"Enter value for {contact_names[choice]}: ")
+                    confirm = input(f"Are you sure you want to change {contact_names[choice]} to {entry}?(yes/no): ")
+                    if confirm == "yes":
+                        self.cur.execute(f"UPDATE user SET {contact_names[choice]}=%s WHERE userID=%s", (entry, self.ID))
+                        print("Changes made.")
+                    else:
+                        print("Changes cancelled.")
+                        return
+                else:
+                    print("Invalid choice.")
+                    return
+        else:
+            print("No changes made.")
+            return
+
 
     
 
@@ -127,6 +181,27 @@ class User:
 class Member(User):
     def __init__(self, id, cur):
         super().__init__(id,cur)
+
+    def notifications(self):
+        self.cur.execute("SELECT itemID, expirationDate FROM reservation WHERE memberID=%s AND status='active' AND expirationDate IS NOT NULL", (self.ID,))
+        for (itemID,expDate) in self.cur.fetchall():
+            print(f"Your reserved item {itemID} is available! Your reservation will expire on {expDate}.")
+
+        today = datetime.date.today()
+
+        self.cur.execute("SELECT itemID, dueDate FROM loan WHERE returnDate IS NULL AND dueDate >= DATE(%s) AND dueDate <= DATE(%s) AND memberID=%s", (str(today), str(today + datetime.timedelta(days=7)), self.ID))
+        for (itemID, dueDate) in self.cur.fetchall():
+            print(f"Your loaned item {itemID} is due soon on {dueDate}.")
+
+        self.cur.execute("SELECT itemID, dueDate FROM loan WHERE returnDate IS NULL AND dueDate < DATE(%s) AND memberID=%s", (str(today),self.ID))
+        for (itemID, dueDate) in self.cur.fetchall():
+            print(f"Your loaned item {itemID} was due on {dueDate}. Turn it in TODAY!!!")
+        
+        self.cur.execute("SELECT SUM(amount) FROM fine WHERE memberID=%s AND status='unpaid'", (self.ID,))
+        tot = self.cur.fetchone()
+        if tot != (None,):
+            print(f"You owe ${tot[0]} in unpaid fines! Pay them TODAY!!!!")
+
 
     def reserve(self):
         #Obtain item id from user.
@@ -188,7 +263,6 @@ class Member(User):
         resID = max+1
 
         #Update all relevant tables to create the reservation.
-        print(self.ID)
         confirm = input(f"\nConfirm(yes/no):\nReservation ID: {resID}\nMember ID: {self.ID}\nItem ID: {itemID}\nReservation Date: {today}\nDue Date: {expirationDate}\nEnter choice: ")
         if confirm == 'yes':
             if expirationDate != None:
@@ -203,15 +277,56 @@ class Member(User):
             print("Reservation cancelled.")
         return
 
+    def view_reservations(self):
+        self.cur.execute("SELECT * FROM reservation WHERE memberID=%s AND status='active'", (self.ID,))
+        results = self.cur.fetchall()
+        if len(results) != 0:
+            for (rID, mID, iID, rDate, expDate, stat) in results:
+                print(f"\nReservation ID: {rID}\nItem Reserved: {iID}\nDate Reserved: {rDate}\nExpiration Date: {expDate}")
+        else:
+            print("\nNo active reservations.")
+
+    def view_loans(self):
+        today = datetime.date.today()
+
+        print("Loans Due Soon:")
+        self.cur.execute("SELECT * FROM loan WHERE returnDate IS NULL AND dueDate >= DATE(%s) AND dueDate <= DATE(%s) AND memberID=%s", (str(today), str(today + datetime.timedelta(days=7)), self.ID))
+        for (lID, mID, iID, cDate, dDate, rDate, l) in self.cur.fetchall():
+            print(f"\nLoan ID: {lID}\nItem Loaned: {iID}\nCheckout Date: {cDate}\nDue Date: {dDate}")
+
+        print("\nLoans OVERDUE:")
+        self.cur.execute("SELECT * FROM loan WHERE returnDate IS NULL AND dueDate < DATE(%s) AND memberID=%s", (str(today),self.ID))
+        for (lID, mID, iID, cDate, dDate, rDate, l) in self.cur.fetchall():
+            print(f"\nLoan ID: {lID}\nItem Loaned: {iID}\nCheckout Date: {cDate}\nDue Date: {dDate}")
+
+
+    def view_fines(self):
+        self.cur.execute("SELECT * FROM fine WHERE memberID=%s AND status='unpaid'", (self.ID,))
+        results = self.cur.fetchall()
+        if len(results) != 0:
+            for (fID, mID, lID, amount, isDate, stat) in results:
+                print(f"\nFine ID: {fID}\nCorresponding Loan: {lID}\nDate Issued: {isDate}\nAmount: ${amount}")
+        else:
+            print("\nNo unpaid fines.")
+
+
 
     def front_end(self):
-        print("\nChoose your option:\n1:Search Catalog\n2:Reserve Media\n3:View Loans\n4:View Fines:\n5:View Reservations\n6:Update Account Information\n5:Exit")
+        print("\nChoose your option:\n1:Search Catalog\n2:Reserve Media\n3:View Loans\n4:View Fines\n5:View Reservations\n6:Update Account Information\n7:Exit")
         choice = input("Enter choice(number): ")
         if choice == '1':
             self.search_interface()
         elif choice == '2':
             self.reserve()
+        elif choice == '3':
+            self.view_loans()
+        elif choice == '4':
+            self.view_fines()
         elif choice == '5':
+            self.view_reservations()
+        elif choice == '6':
+            self.update_contact_info()
+        elif choice == '7':
             print("Have a nice day!")
             return 0
         else:
@@ -243,13 +358,11 @@ class Staff(User):
         super().__init__(id,cur)
 
 
-
-
     def process_return(self):
         itemID = int(input("\nEnter Item ID: "))
         self.cur.execute("SELECT * FROM loan WHERE returnDate IS NULL AND itemID=%s", (itemID,))
         loan_result = self.cur.fetchone()
-        if loan_result == None:
+        if loan_result == (None,):
             print("No active loan for that member\n")
             return
         loanID = loan_result[0]
@@ -257,19 +370,19 @@ class Staff(User):
         itemID = loan_result[2]
         checkoutDate = loan_result[3]
         dueDate = loan_result[4]
-        lateFeeRate = loan_result[6]
+        lateFeeCharge = loan_result[6]
 
         today = datetime.date.today()
 
         print(f"\nProcessing return for loan {loanID}")
-        if lateFeeRate != 0:
+        if lateFeeCharge != 0:
             print("Overdue return detected.")
 
         choice = input("Confirm return?(yes/no): ")
         if choice == "yes":
             self.cur.execute("UPDATE loan SET returnDate=%s WHERE loanID=%s", (str(today), loanID,))
             self.cur.execute("UPDATE media SET availabilityStatus='available' WHERE itemID=%s", (itemID,))
-            if lateFeeRate != 0:
+            if lateFeeCharge != 0:
                 query = "SELECT MAX(fineID) FROM fine"
                 self.cur.execute(query)
                 result = self.cur.fetchall()
@@ -278,9 +391,13 @@ class Staff(User):
                     max = num
                 fineID = max + 1
 
-                self.cur.execute("INSERT INTO fine VALUES (%s,%s,%s,%s,%s,%s)", (fineID,memberID,loanID,lateFeeRate,"unpaid"))
+                self.cur.execute("INSERT INTO fine VALUES (%s,%s,%s,%s,%s,%s)", (fineID,memberID,loanID,lateFeeCharge,str(today),"unpaid"))
+                print(f"Fine created with ID: {fineID}")
                 self.cur.execute("INSERT INTO triggers VALUES (%s,%s)", (loanID,fineID))
                 self.cur.execute("INSERT INTO owes VALUES (%s,%s)", (fineID,memberID))
+
+            self.cur.execute("UPDATE reservation SET expirationDate=%s WHERE itemID=%s AND status='active'",(str(today + datetime.timedelta(days=3)),itemID))
+
             print("Return successful.")
 
         else:
@@ -336,19 +453,19 @@ class Staff(User):
         query = "SELECT * FROM media WHERE itemID=%s"
         self.cur.execute(query, (itemID,))
         result = self.cur.fetchone()
-        if result == None:
+        if result == (None,):
             print("No matching media item found.")
             return
         
         self.cur.execute("SELECT * FROM loan WHERE itemID=%s AND returnDate is NULL",(itemID,))
-        if self.cur.fetchone() != None:
+        if self.cur.fetchone() != (None,):
             print("Item is already on loan.")
             return
         
         self.cur.execute("SELECT memberID,reservationID FROM reservation WHERE itemID=%s AND status='active'", (itemID,))
         fulfill_res = False
         result = self.cur.fetchone()
-        if result != None:
+        if result != (None,):
             if result[0] == memberID:
                 fulfill_res = True
             else:
@@ -384,13 +501,49 @@ class Staff(User):
 
 
 
+    def process_payment(self):
+        memberID = int(input("\nEnter Member ID: "))
+        self.cur.execute("SELECT fineID, amount FROM fine WHERE memberID=%s", (memberID,))
+        fines = self.cur.fetchall()
+        if len(fines) == 0:
+            print("No fines for this member")
+            return
+        else:
+            print("\n")
+            for (id, amount) in fines:
+                print(f"Fine {id} for ${amount}")
+
+        fineID = int(input("Enter desired fine ID: "))
+        self.cur.execute("SELECT * FROM fine WHERE fineID=%s", (fineID,))
+        result = self.cur.fetchone()
+        if result == (None,):
+            print("No fine found.")
+            return
+
+        amount = result[3]
+
+        today = datetime.date.today()
 
 
+        query = "SELECT MAX(paymentID) FROM payment"
+        self.cur.execute(query)
+        result = self.cur.fetchall()
+        max = None
+        for (num,) in result:
+            max = num
+        paymentID = max + 1
 
+        choice = input(f"Confirm (yes/no):\nPayment {paymentID} towards fine {fineID} by member {memberID} for ${amount}\nEnter choice: ")
+        if choice == "yes":
+            self.cur.execute("INSERT INTO payment VALUES (%s,%s,%s,%s,%s)", (paymentID, fineID, memberID, str(today), amount))
+            self.cur.execute("UPDATE fine SET status='paid' WHERE fineID=%s", (fineID,))
+            self.cur.execute("INSERT INTO pays VALUES (%s,%s)", (paymentID, memberID))
+            self.cur.execute("INSERT INTO pays_for VALUES (%s,%s)", (paymentID,fineID))
+            print("\nPayment successful.")
+        else:
+            print("Payment cancelled.")
 
-
-
-
+        return
 
 
 
@@ -506,28 +659,6 @@ class Staff(User):
         return
 
 
-
-
-    #Will add more functions for other options (checkout, user management, etc).
-    def front_end(self):
-        print("\nChoose you option:\n1:Add Media\n2:Checkout Media\n3:Process Return\n4:Process Payment\n5:Search Media\n6:Exit")
-        choice = input("Enter choice(number): ")
-        if choice == '1':
-            self.insert_media()
-        elif choice == '2':
-            self.checkout()
-        elif choice == '3':
-            self.process_return()
-        elif choice == '5':
-            self.search_interface()
-        elif choice == '6':
-            print("Have a nice day!")
-            return 0
-        else:
-            print("Choice not recognized. Try again!")
-        return 1
-
-
     def problem_user_report(self):
         #This function will generate a report of all problem users. A problem user is defined as one who has 3 or more overdue loans or 2 or more unpaid fines.
         #It will also check if the user is currently borrowing any items. If they are not, it will recommend deactivation of their account.
@@ -596,9 +727,145 @@ class Staff(User):
 
 
 
+    def collection_analysis(self):
+        print("\n------ COLLECTION ANALYSIS REPORT ------\n")
+
+        # 1. Most Frequently Borrowed Items
+        print("Top 10 Most Frequently Borrowed Items:")
+        self.cur.execute("""
+            SELECT m.itemID, m.title, COUNT(l.loanID) AS borrowCount
+            FROM media m
+            JOIN loan l ON m.itemID = l.itemID
+            GROUP BY m.itemID
+            ORDER BY borrowCount DESC
+            LIMIT 10;
+        """)
+        for itemID, title, count in self.cur.fetchall():
+            print(f"Item ID: {itemID}, Title: {title}, Times Borrowed: {count}")
+        print()
+
+        # 2. Least Frequently Borrowed Items
+        print("Top 10 Least Frequently Borrowed Items:")
+        self.cur.execute("""
+            SELECT m.itemID, m.title, COUNT(l.loanID) AS borrowCount
+            FROM media m
+            LEFT JOIN loan l ON m.itemID = l.itemID
+            GROUP BY m.itemID
+            HAVING borrowCount > 0
+            ORDER BY borrowCount ASC
+            LIMIT 10;
+        """)
+        for itemID, title, count in self.cur.fetchall():
+            print(f"Item ID: {itemID}, Title: {title}, Times Borrowed: {count}")
+        print()
+
+        # 3. Items Most Often Returned Late
+        print("Items Most Often Returned Late:")
+        self.cur.execute("""
+            SELECT m.itemID, m.title, COUNT(*) AS lateReturns
+            FROM media m
+            JOIN loan l ON m.itemID = l.itemID
+            WHERE l.returnDate > l.dueDate
+            GROUP BY m.itemID
+            ORDER BY lateReturns DESC
+            LIMIT 10;
+        """)
+        for itemID, title, count in self.cur.fetchall():
+            print(f"Item ID: {itemID}, Title: {title}, Late Returns: {count}")
+        print()
+
+        # 4. Collection Circulation Summary
+        print("Collection Circulation Summary:")
+        self.cur.execute("SELECT COUNT(*) FROM media;")
+        total_items = self.cur.fetchone()[0]
+
+        self.cur.execute("SELECT COUNT(DISTINCT itemID) FROM loan;")
+        items_borrowed = self.cur.fetchone()[0]
+
+        if total_items > 0:
+            circulation_rate = (items_borrowed / total_items) * 100
+        else:
+            circulation_rate = 0
+
+        print(f"Total Items in Collection: {total_items}")
+        print(f"Items Borrowed At Least Once: {items_borrowed}")
+        print(f"Circulation Rate: {circulation_rate:.2f}%")
+        print()
+
+    
+
+    def report_interface(self):
+        choice = input("\nEnter report to generate:\n1:Problem Member Analysis\n2:Collection Analysis\n3:\nEnter number: ")
+        if choice == '1':
+            self.problem_user_report()
+        elif choice == '2':
+            self.collection_analysis()
+        else:
+            print("Choice not recognized.")
+
+    #Will add more functions for other options (checkout, user management, etc).
+    def front_end(self):
+        print("\nChoose your option:\n1:Add Media\n2:Checkout Media\n3:Process Return\n4:Process Payment\n5:Search Media\n6:Generate Report\n7:Update Contact Info\n8:Exit")
+        choice = input("Enter choice(number): ")
+        if choice == '1':
+            self.insert_media()
+        elif choice == '2':
+            self.checkout()
+        elif choice == '3':
+            self.process_return()
+        elif choice == '5':
+            self.search_interface()
+        elif choice == '4':
+            self.process_payment()
+        elif choice == '6':
+            self.report_interface()
+        elif choice == '7':
+            self.update_contact_info()
+        elif choice == '8':
+            print("Have a nice day!")
+            return 0
+        else:
+            print("Choice not recognized. Try again!")
+        return 1
 
 
 
+
+
+
+
+
+class Admin(User):
+    def __init__(self, id, cur):
+        super().__init__(id,cur)
+
+    def query(self):
+        query = input("Enter SQL query(exclude semicolon): ")
+        try:
+            self.cur.execute(query)
+            results = self.cur.fetchall()
+            if len(results) != 0:
+                for row in results:
+                    print(row)
+            else:
+                print("No results returned.")
+        except Exception as E:
+            print(E)
+            return
+        
+    def front_end(self):
+        print("\nChoose your option:\n1:Enter Query\n2:Update Contact Info\n3:Search Media\n4:Exit")
+        choice = input("Enter choice(number): ")      
+        if choice == '1':
+            self.query()
+        elif choice == '2':
+            self.update_contact_info()
+        elif choice == '3':
+            self.search_interface()
+        elif choice == '4':
+            print("Have a nice day!")
+            return 0
+        return 1  
 
 
 
@@ -622,8 +889,13 @@ class Interface:
     def update(self):
         today = datetime.date.today()
         self.cur.execute("UPDATE reservation SET status='inactive' WHERE status='active' AND expirationDate < DATE(%s)", (str(today),))
-
-
+        self.cur.execute("SELECT loanID FROM loan WHERE dueDate < DATE(%s) AND returnDate IS NULL", (str(today),))
+        overdue_loans = self.cur.fetchall()
+        if len(overdue_loans) != 0:
+            for (loanID,) in overdue_loans:
+                self.cur.execute("select DATEDIFF(\"2025-05-04\", l.dueDate) * (m.lateFeeRate+i.specialPremium) from (loan l join member m on l.memberID = m.userID) join media i on i.itemID=l.itemID where loanID=%s", (loanID,))
+                charge = self.cur.fetchone()[0]
+                self.cur.execute("UPDATE loan SET lateFeeCharge=%s WHERE loanID=%s", (charge, loanID))
         self.conn.commit()
 
     #Login feature. User must input a valid ID that appears in the user table. 
@@ -665,12 +937,17 @@ class Interface:
                     self.conn.commit()
             elif userType == 1:
                 member = Member(id, self.cur)
+                member.notifications()
                 stay_on = 1
                 while stay_on == 1:
                     stay_on = member.front_end()
                     self.conn.commit()
             elif userType == 2:
-                print("Hello admin!")
+                admin = Admin(id, self.cur)
+                stay_on = 1
+                while stay_on == 1:
+                    stay_on = admin.front_end()
+                    self.conn.commit()
             self.conn.close()
         except Exception as e:
             print(f"Error: {e}")
