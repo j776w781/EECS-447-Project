@@ -893,7 +893,7 @@ class Interface:
         overdue_loans = self.cur.fetchall()
         if len(overdue_loans) != 0:
             for (loanID,) in overdue_loans:
-                self.cur.execute("select DATEDIFF(\"2025-05-04\", l.dueDate) * (m.lateFeeRate+i.specialPremium) from (loan l join member m on l.memberID = m.userID) join media i on i.itemID=l.itemID where loanID=%s", (loanID,))
+                self.cur.execute(f"select DATEDIFF(\"{str(today)}\", l.dueDate) * (m.lateFeeRate+i.specialPremium) from (loan l join member m on l.memberID = m.userID) join media i on i.itemID=l.itemID where loanID=%s", (loanID,))
                 charge = self.cur.fetchone()[0]
                 self.cur.execute("UPDATE loan SET lateFeeCharge=%s WHERE loanID=%s", (charge, loanID))
         self.conn.commit()
