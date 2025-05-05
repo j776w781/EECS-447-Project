@@ -795,7 +795,7 @@ class Staff(User):
     
 
     def report_interface(self):
-        choice = input("\nEnter report to generate:\n1:Problem Member Analysis\n2:Collection Analysis\n3:\nEnter number: ")
+        choice = input("\nEnter report to generate:\n1:Problem Member Analysis\n2:Collection Analysis\nEnter number: ")
         if choice == '1':
             self.problem_user_report()
         elif choice == '2':
